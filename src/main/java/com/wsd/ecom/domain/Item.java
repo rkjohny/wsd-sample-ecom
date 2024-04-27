@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 
 @Entity
@@ -13,7 +14,8 @@ import org.hibernate.annotations.ColumnDefault;
         @Index(columnList = "last_modified_by")
 })
 public class Item extends AbstractAuditingEntity {
-    @Column(name = "name", nullable = false, length = Constants.MAX_ITEM_NAME_LENGTH)
+    @Column(name = "name", nullable = false, unique = true)
+    @Size(min = 3, max = Constants.MAX_ITEM_NAME_LENGTH)
     @ColumnDefault("''")
     private String name;
 
