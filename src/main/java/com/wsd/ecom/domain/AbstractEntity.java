@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @MappedSuperclass
+@EntityListeners(AbstractEntity.class)
 public abstract class AbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
