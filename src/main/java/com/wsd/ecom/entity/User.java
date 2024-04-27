@@ -1,23 +1,27 @@
-package com.wsd.ecom.domain;
+package com.wsd.ecom.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wsd.ecom.config.Constants;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.ColumnDefault;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "t_user", indexes = {
         @Index(columnList = "created_by"),
-        @Index(columnList = "last_modified_by")
+        @Index(columnList = "last_modified_by"),
+        @Index(columnList = "created_date"),
+        @Index(columnList = "last_modified_date")
 })
+@MappedSuperclass
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends AbstractAuditingEntity {
     @NotNull
@@ -48,54 +52,6 @@ public class User extends AbstractAuditingEntity {
 
     @Column(name = "is_disabled")
     private Boolean disabled = Boolean.FALSE;
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(Boolean disabled) {
-        this.disabled = disabled;
-    }
 
 
     // Do not log password

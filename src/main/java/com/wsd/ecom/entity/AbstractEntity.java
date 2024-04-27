@@ -1,12 +1,15 @@
-package com.wsd.ecom.domain;
+package com.wsd.ecom.entity;
 
-import com.wsd.ecom.domain.util.Status;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Setter
+@Getter
 @MappedSuperclass
 @EntityListeners(AbstractEntity.class)
 public abstract class AbstractEntity implements Serializable {
@@ -19,22 +22,6 @@ public abstract class AbstractEntity implements Serializable {
 
     @Enumerated(EnumType.STRING)
     protected Status status = Status.V;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     @Transient
     public boolean isNew() {

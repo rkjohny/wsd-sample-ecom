@@ -1,18 +1,25 @@
-package com.wsd.ecom.domain;
+package com.wsd.ecom.entity;
 
 import com.wsd.ecom.config.Constants;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.ColumnDefault;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "t_item", indexes = {
         @Index(columnList = "created_by"),
-        @Index(columnList = "last_modified_by")
+        @Index(columnList = "last_modified_by"),
+        @Index(columnList = "created_date"),
+        @Index(columnList = "last_modified_date")
 })
+@MappedSuperclass
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Item extends AbstractAuditingEntity {
     @Column(name = "name", nullable = false, unique = true)
     @Size(min = 3, max = Constants.MAX_ITEM_NAME_LENGTH)
@@ -28,38 +35,6 @@ public class Item extends AbstractAuditingEntity {
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Override
     public String toString() {

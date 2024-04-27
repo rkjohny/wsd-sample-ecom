@@ -51,11 +51,11 @@ dependencies {
 	implementation group: 'de.siegmar', name: 'logback-gelf', version: '5.0.1'
 }
 
-dependencyManagement {
-	imports {
-
-	}
-}
+//dependencyManagement {
+//	imports {
+//
+//	}
+//}
 
 tasks.named('test') {
 	outputs.dir snippetsDir
