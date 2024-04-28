@@ -1,7 +1,6 @@
-package com.wsd.ecom.service.impl;
+package com.wsd.ecom.service;
 
-import com.wsd.ecom.dto.CartItemDto;
-import com.wsd.ecom.entity.CartItem;
+
 import com.wsd.ecom.mapper.CartItemMapper;
 import com.wsd.ecom.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
@@ -13,13 +12,12 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @Transactional
-public class CartItemItemServiceImpl extends AbstractServiceImpl<CartItem, CartItemDto, CartItemRepository, CartItemMapper> {
+public class CartItemItemService {
     private final CartItemRepository repository;
     private final CartItemMapper mapper;
 
     @Autowired
-    public CartItemItemServiceImpl(CartItemRepository repository, CartItemMapper mapper) {
-        super(repository, mapper);
+    public CartItemItemService(CartItemRepository repository, CartItemMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

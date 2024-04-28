@@ -1,25 +1,23 @@
 package com.wsd.ecom.service;
 
-import com.wsd.ecom.dto.MaxSaleDayDto;
-import com.wsd.ecom.dto.SaleDto;
-import com.wsd.ecom.entity.Sale;
+import com.wsd.ecom.mapper.SaleMapper;
+import com.wsd.ecom.repository.SaleRepository;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.time.Instant;
 
+@Slf4j
 @Service
-public interface SaleService extends IService<Sale, SaleDto> {
-//    /**
-//     * @param startDate
-//     * @param endDate
-//     * @return total sale amount.
-//     */
-//    Double totalSale(Instant startDate, Instant endDate);
-//    /**
-//     * @param startDate
-//     * @param endDate
-//     * @return Maximum sale day of specific date range.
-//     */
-//    MaxSaleDayDto getMaxSaleDay(Instant startDate, Instant endDate) throws ParseException;
+@Transactional
+public class SaleService {
+    private final SaleRepository repository;
+    private final SaleMapper mapper;
+
+    @Autowired
+    public SaleService(SaleRepository repository, SaleMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 }

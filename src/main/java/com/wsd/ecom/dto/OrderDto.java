@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDto implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private Long id;
     private Double amount;
     private UserDto customer;

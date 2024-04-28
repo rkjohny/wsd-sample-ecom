@@ -12,6 +12,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SaleDto implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Long id;
     private ItemDto item;
     private Long quantity;

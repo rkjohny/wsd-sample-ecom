@@ -23,7 +23,7 @@ logging:
   file:
     name: logs/ecom.log
   level:
-    root: DEBUG
+    root: INFO
 
 springdoc:
   swagger-ui:

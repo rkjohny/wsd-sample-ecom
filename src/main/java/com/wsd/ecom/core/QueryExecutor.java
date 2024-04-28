@@ -1,4 +1,4 @@
-package com.wsd.ecom.service;
+package com.wsd.ecom.core;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
