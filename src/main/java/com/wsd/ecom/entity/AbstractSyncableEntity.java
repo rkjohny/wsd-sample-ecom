@@ -16,9 +16,4 @@ public abstract class AbstractSyncableEntity extends AbstractEntity implements S
     @Version
     @Column(name = "sync_version")
     protected Long syncVersion = 0L;
-
-    @Transient
-    public boolean isNew() {
-        return getSyncVersion() == null || getSyncVersion() == 0L;
-    }
 }

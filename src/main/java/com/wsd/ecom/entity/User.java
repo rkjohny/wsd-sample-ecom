@@ -5,64 +5,79 @@ import com.wsd.ecom.config.Constants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.ColumnDefault;
 
-@Setter
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * A user.
+ */
 @Getter
+@Setter
 @Entity
-@Table(name = "t_user", indexes = {
-        @Index(columnList = "created_by"),
-        @Index(columnList = "last_modified_by"),
-        @Index(columnList = "created_date"),
-        @Index(columnList = "last_modified_date")
-})
-@MappedSuperclass
+@Table(name = "t_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class User extends AbstractAuditingEntity {
+public class User extends AbstractAuditingEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @NotNull
-    @Column(name="login", length = Constants.MAX_LOGIN_LENGTH, nullable = false, unique = true)
-    @ColumnDefault("''")
+    @Pattern(regexp = Constants.LOGIN_REGEX)
+    @Size(min = 1, max = 50)
+    @Column(length = 50, unique = true, nullable = false)
     private String login;
 
-    @Email
-    @NotNull
-    @Size(min = 3, max = Constants.MAX_EMAIL_LENGTH)
-    @Column(name = "email", length = Constants.MAX_EMAIL_LENGTH, columnDefinition = "CHARACTER VARYING (100) COLLATE \"C\"", unique = true)
-    @ColumnDefault("''")
-    private String email;
-
-    @Size(max = Constants.MAX_FIRSTNAME_LASTNAME_LENGTH)
-    @Column(name = "first_name", length = Constants.MAX_FIRSTNAME_LASTNAME_LENGTH)
-    @ColumnDefault("''")
-    private String firstName;
-
-    @Size(max = Constants.MAX_FIRSTNAME_LASTNAME_LENGTH)
-    @Column(name = "last_name", length = Constants.MAX_FIRSTNAME_LASTNAME_LENGTH)
-    @ColumnDefault("''")
-    private String lastName;
-
     @JsonIgnore
-    @Column(name = "password_hash", length = 200)
+    @NotNull
+    @Size(min = 60, max = 60)
+    @Column(name = "password_hash", length = 60, nullable = false)
     private String password;
 
-    @Column(name = "is_disabled")
-    private Boolean disabled = Boolean.FALSE;
+    @Size(max = 50)
+    @Column(name = "first_name", length = 50)
+    private String firstName;
 
+    @Size(max = 50)
+    @Column(name = "last_name", length = 50)
+    private String lastName;
 
-    // Do not log password
-    @Override
-    public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", disabled=" + disabled +
-                '}';
-    }
+    @Email
+    @Size(min = 5, max = 254)
+    @Column(length = 254, unique = true)
+    private String email;
+
+    @NotNull
+    @Column(nullable = false)
+    private boolean activated = false;
+
+    @Size(min = 2, max = 10)
+    @Column(name = "lang_key", length = 10)
+    private String langKey;
+
+    @Size(max = 256)
+    @Column(name = "image_url", length = 256)
+    private String imageUrl;
+
+    @Size(max = 20)
+    @Column(name = "activation_key", length = 20)
+    @JsonIgnore
+    private String activationKey;
+
+    @Size(max = 20)
+    @Column(name = "reset_key", length = 20)
+    @JsonIgnore
+    private String resetKey;
+
+    @Column(name = "reset_date")
+    private Instant resetDate = null;
 }

@@ -8,38 +8,37 @@ import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Setter
 @Getter
 @Entity
-@Table(name = "t_sale", indexes = {
-        @Index(columnList = "created_by"),
-        @Index(columnList = "last_modified_by"),
-        @Index(columnList = "created_date"),
-        @Index(columnList = "last_modified_date")
-})
-@MappedSuperclass
+@Table(name = "t_sale")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @JsonIgnoreProperties(value = { "customer" }, allowSetters = true, allowGetters = false)
-public class Sale extends AbstractAuditingEntity {
+public class Sale extends AbstractAuditingEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @NotNull
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Item item;
+    protected Item item;
 
     @NotNull
     @Column(name = "quantity")
-    private Long quantity;
+    protected Long quantity;
 
     @NotNull
     @Column(name = "amount")
-    private Double amount;
+    protected Double amount;
 
     @NotNull
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User customer;
+    protected User customer;
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
-
 }

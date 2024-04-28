@@ -9,18 +9,18 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Setter
 @Getter
 @Entity
-@Table(name = "t_item", indexes = {
-        @Index(columnList = "created_by"),
-        @Index(columnList = "last_modified_by"),
-        @Index(columnList = "created_date"),
-        @Index(columnList = "last_modified_date")
-})
-@MappedSuperclass
+@Table(name = "t_item")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Item extends AbstractAuditingEntity {
+public class Item extends AbstractAuditingEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "name", nullable = false, unique = true)
     @Size(min = 3, max = Constants.MAX_ITEM_NAME_LENGTH)
     @ColumnDefault("''")
@@ -35,14 +35,4 @@ public class Item extends AbstractAuditingEntity {
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", unit='" + unit + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

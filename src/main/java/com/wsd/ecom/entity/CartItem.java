@@ -9,19 +9,19 @@ import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+
 @Getter
 @Setter
 @Entity
-@Table(name = "t_cart_item", indexes = {
-        @Index(columnList = "created_by"),
-        @Index(columnList = "last_modified_by"),
-        @Index(columnList = "created_date"),
-        @Index(columnList = "last_modified_date")
-})
-@MappedSuperclass
+@Table(name = "t_cart_item")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @JsonIgnoreProperties(value = { "customer" }, allowSetters = true, allowGetters = false)
-public class CartItem extends AbstractAuditingEntity {
+public class CartItem extends AbstractAuditingEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @NotNull
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -40,8 +40,7 @@ public class CartItem extends AbstractAuditingEntity {
     private User customer;
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
-
 }

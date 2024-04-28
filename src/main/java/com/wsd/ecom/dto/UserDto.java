@@ -19,13 +19,13 @@ public class UserDto implements Serializable {
     private String email;
     private String firstName;
     private String lastName;
-    private Boolean disabled;
+    private Boolean activated;
 
     public UserDto(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.disabled = user.getDisabled();
+        this.activated = user.isActivated();
     }
 }

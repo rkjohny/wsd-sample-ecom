@@ -2,8 +2,9 @@ package com.wsd.ecom.repository;
 
 
 import com.wsd.ecom.entity.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends IRepository<Order> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }
