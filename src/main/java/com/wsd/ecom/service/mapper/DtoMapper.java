@@ -1,10 +1,13 @@
-package com.wsd.ecom.mapper;
+package com.wsd.ecom.service.mapper;
+
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 /**
  * @param <D> - DTO.
  * @param <E> - Entity
  */
+
 public interface DtoMapper<E, D> {
     E toEntity(D dto);
 
