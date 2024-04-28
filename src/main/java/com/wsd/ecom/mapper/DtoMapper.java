@@ -1,4 +1,4 @@
-package com.wsd.ecom.service.mapper;
+package com.wsd.ecom.mapper;
 
 import org.springframework.stereotype.Component;
 
