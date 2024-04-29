@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 public class ObjectNotFoundException extends AbstractException {
 
     public ObjectNotFoundException() {
-        super("Item not found.");
+        super("Object not found.");
         setStatus(HttpStatus.NOT_FOUND);
     }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Getter
 @MappedSuperclass
 public abstract class AbstractSyncableEntity extends AbstractEntity implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Version

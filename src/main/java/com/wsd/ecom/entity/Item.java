@@ -33,6 +33,35 @@ public class Item extends AbstractAuditingEntity implements Serializable {
     @ColumnDefault("''")
     private String unit;
 
+    @Column(name = "currency", nullable = false)
+    @ColumnDefault("''")
+    private String currency;
+
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
+    public Item name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Item unitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+        return this;
+    }
+
+    public Item unit(String unit) {
+        this.unit = unit;
+        return this;
+    }
+
+    public Item currency(String currency) {
+        this.currency = currency;
+        return this;
+    }
+
+    public Item description(String description) {
+        this.description = description;
+        return this;
+    }
 }

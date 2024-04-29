@@ -33,51 +33,60 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 1, max = 50)
-    @Column(length = 50, unique = true, nullable = false)
+    @Size(min = 8, max = Constants.MAX_LOGIN_LENGTH)
+    @Column(unique = true, nullable = false)
     private String login;
 
     @JsonIgnore
     @NotNull
-    @Size(min = 60, max = 60)
-    @Column(name = "password_hash", length = 60, nullable = false)
+    @Size(min = 8, max = Constants.MAX_PASSWORD_LENGTH)
+    @Column(name = "password_hash", nullable = false)
     private String password;
 
-    @Size(max = 50)
-    @Column(name = "first_name", length = 50)
+    @Size(max = Constants.MAX_FIRSTNAME_LASTNAME_LENGTH)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Size(max = 50)
-    @Column(name = "last_name", length = 50)
+    @Size(max = Constants.MAX_FIRSTNAME_LASTNAME_LENGTH)
+    @Column(name = "last_name")
     private String lastName;
 
     @Email
-    @Size(min = 5, max = 254)
-    @Column(length = 254, unique = true)
+    @Size(min = 5, max = Constants.MAX_EMAIL_LENGTH)
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
 
-    @Size(min = 2, max = 10)
-    @Column(name = "lang_key", length = 10)
-    private String langKey;
+    public User login(String login) {
+        this.login = login;
+        return this;
+    }
 
-    @Size(max = 256)
-    @Column(name = "image_url", length = 256)
-    private String imageUrl;
+    public User password(String password) {
+        this.password = password;
+        return this;
+    }
 
-    @Size(max = 20)
-    @Column(name = "activation_key", length = 20)
-    @JsonIgnore
-    private String activationKey;
+    public User firstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
 
-    @Size(max = 20)
-    @Column(name = "reset_key", length = 20)
-    @JsonIgnore
-    private String resetKey;
+    public User lastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
 
-    @Column(name = "reset_date")
-    private Instant resetDate = null;
+    public User email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public User activated(boolean activated) {
+        this.activated = activated;
+        return this;
+    }
 }

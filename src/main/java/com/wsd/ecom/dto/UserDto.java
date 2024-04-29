@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @ToString
 public class UserDto implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
