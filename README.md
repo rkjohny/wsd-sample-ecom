@@ -22,7 +22,7 @@
   </br>
   Log visualization with Loki and Grafana
   </br>
-  API documentation
+  API documentation with OpenApi specification
   </br>
   Initialized with random data to test API
   </br>
