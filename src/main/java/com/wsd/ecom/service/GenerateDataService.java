@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -23,7 +22,6 @@ public class GenerateDataService {
     private final CartService cartService;
     private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
-    private final SaleRepository saleRepository;
 
     public void insertUser(int numberOfUser) {
         IntStream.range(0, numberOfUser).forEachOrdered(i -> {
@@ -97,7 +95,7 @@ public class GenerateDataService {
                 }
                 order.getSales().add(sale);
             }
-            order = orderRepository.saveAndFlush(order);
+            orderRepository.saveAndFlush(order);
 
             cart.setStatus(Status.D);
             cartService.save(cart);
