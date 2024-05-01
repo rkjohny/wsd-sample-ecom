@@ -37,7 +37,6 @@ public class SaleService {
     public GetMaxSaleDayOutput getMaxSaleDay(LocalDate start, LocalDate end) {
         GetMaxSaleDayOutput output = new GetMaxSaleDayOutput();
 
-        // TODO: Note: BETWEEN Operator are inclusive of both startDay and endDay
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT sum(s.amount) as amount, DATE(s.createdDate) as dt");
         sb.append(" FROM Sale s WHERE s.createdDate BETWEEN :startDate AND :endDate AND s.status='V'");
@@ -94,7 +93,6 @@ public class SaleService {
         ZonedDateTime start = firstDayOfCurrentMonth.minus(1, ChronoUnit.MONTHS);
         ZonedDateTime end = firstDayOfCurrentMonth.minusNanos(1);
 
-        // TODO Note: BETWEEN Operator are inclusive of both startDay and endDay
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT sum(s.quantity) as quantity, s.item.id as itemId, s.item.name as itemName");
         sb.append(" FROM Sale s WHERE s.status='V'");

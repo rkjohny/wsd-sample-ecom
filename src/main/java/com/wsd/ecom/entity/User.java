@@ -33,13 +33,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 8, max = Constants.MAX_LOGIN_LENGTH)
+    @Size(min = 4, max = Constants.MAX_LOGIN_LENGTH)
     @Column(unique = true, nullable = false)
     private String login;
 
-    @JsonIgnore
+    //@JsonIgnore comment it for test purpose
     @NotNull
-    @Size(min = 8, max = Constants.MAX_PASSWORD_LENGTH)
+    @Size(min = 4, max = Constants.MAX_PASSWORD_LENGTH)
     @Column(name = "password_hash", nullable = false)
     private String password;
 

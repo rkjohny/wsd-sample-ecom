@@ -29,6 +29,17 @@ public abstract class AbstractEntity implements Serializable {
         return getId() == null || getId() == 0L;
     }
 
+
+    public AbstractEntity id(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public AbstractEntity status(Status status) {
+        this.status = status;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

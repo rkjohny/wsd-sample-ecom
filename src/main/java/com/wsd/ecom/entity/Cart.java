@@ -29,6 +29,6 @@ public class Cart extends AbstractAuditingEntity implements Serializable {
     @ManyToOne(optional = false)
     protected User customer;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CartItem> cartItems = new ArrayList<>();
 }

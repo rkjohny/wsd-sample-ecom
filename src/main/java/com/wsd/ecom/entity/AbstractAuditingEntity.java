@@ -46,4 +46,23 @@ public abstract class AbstractAuditingEntity extends AbstractSyncableEntity impl
     @Column(name = "last_modified_date")
     protected Instant lastModifiedDate = Instant.now();
 
+    public AbstractAuditingEntity createdBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public AbstractAuditingEntity createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public AbstractAuditingEntity lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+        return this;
+    }
+
+    public AbstractAuditingEntity lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+        return this;
+    }
 }
