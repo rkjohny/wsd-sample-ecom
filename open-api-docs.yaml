@@ -1,0 +1,3711 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /cartItems:
+    get:
+      tags:
+      - cart-item-entity-controller
+      description: get-cartitem
+      operationId: getCollectionResource-cartitem-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCartItem'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCartItem'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - cart-item-entity-controller
+      description: create-cartitem
+      operationId: postCollectionResource-cartitem-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCartItem'
+  /cartItems/{id}:
+    get:
+      tags:
+      - cart-item-entity-controller
+      description: get-cartitem
+      operationId: getItemResource-cartitem-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCartItem'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-item-entity-controller
+      description: update-cartitem
+      operationId: putItemResource-cartitem-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCartItem'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCartItem'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-item-entity-controller
+      description: delete-cartitem
+      operationId: deleteItemResource-cartitem-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-item-entity-controller
+      description: patch-cartitem
+      operationId: patchItemResource-cartitem-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItemRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCartItem'
+        "204":
+          description: No Content
+  /cartItems/{id}/cart:
+    get:
+      tags:
+      - cart-item-property-reference-controller
+      description: get-cart-by-cartitem-Id
+      operationId: followPropertyReference-cartitem-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-item-property-reference-controller
+      description: update-cart-by-cartitem-Id
+      operationId: createPropertyReference-cartitem-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-item-property-reference-controller
+      description: delete-cart-by-cartitem-Id
+      operationId: deletePropertyReference-cartitem-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-item-property-reference-controller
+      description: patch-cart-by-cartitem-Id
+      operationId: createPropertyReference-cartitem-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "204":
+          description: No Content
+  /cartItems/{id}/cart/{propertyId}:
+    get:
+      tags:
+      - cart-item-property-reference-controller
+      description: get-cart-by-cartitem-Id
+      operationId: followPropertyReference-cartitem-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - cart-item-property-reference-controller
+      description: delete-cart-by-cartitem-Id
+      operationId: deletePropertyReferenceId-cartitem-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /cartItems/{id}/customer:
+    get:
+      tags:
+      - cart-item-property-reference-controller
+      description: get-user-by-cartitem-Id
+      operationId: followPropertyReference-cartitem-get_2_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-item-property-reference-controller
+      description: update-user-by-cartitem-Id
+      operationId: createPropertyReference-cartitem-put_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-item-property-reference-controller
+      description: delete-user-by-cartitem-Id
+      operationId: deletePropertyReference-cartitem-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-item-property-reference-controller
+      description: patch-user-by-cartitem-Id
+      operationId: createPropertyReference-cartitem-patch_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /cartItems/{id}/customer/{propertyId}:
+    get:
+      tags:
+      - cart-item-property-reference-controller
+      description: get-user-by-cartitem-Id
+      operationId: followPropertyReference-cartitem-get_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - cart-item-property-reference-controller
+      description: delete-user-by-cartitem-Id
+      operationId: deletePropertyReferenceId-cartitem-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /cartItems/{id}/item:
+    get:
+      tags:
+      - cart-item-property-reference-controller
+      description: get-item-by-cartitem-Id
+      operationId: followPropertyReference-cartitem-get_3_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-item-property-reference-controller
+      description: update-item-by-cartitem-Id
+      operationId: createPropertyReference-cartitem-put_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-item-property-reference-controller
+      description: delete-item-by-cartitem-Id
+      operationId: deletePropertyReference-cartitem-delete_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-item-property-reference-controller
+      description: patch-item-by-cartitem-Id
+      operationId: createPropertyReference-cartitem-patch_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "204":
+          description: No Content
+  /cartItems/{id}/item/{propertyId}:
+    get:
+      tags:
+      - cart-item-property-reference-controller
+      description: get-item-by-cartitem-Id
+      operationId: followPropertyReference-cartitem-get_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - cart-item-property-reference-controller
+      description: delete-item-by-cartitem-Id
+      operationId: deletePropertyReferenceId-cartitem-delete_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /carts:
+    get:
+      tags:
+      - cart-entity-controller
+      description: get-cart
+      operationId: getCollectionResource-cart-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCart'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelCart'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - cart-entity-controller
+      description: create-cart
+      operationId: postCollectionResource-cart-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+  /carts/search/findOneByUserAndStatus:
+    get:
+      tags:
+      - cart-search-controller
+      operationId: executeSearch-cart-get
+      parameters:
+      - name: userId
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "404":
+          description: Not Found
+  /carts/search/getAllByStatus:
+    get:
+      tags:
+      - cart-search-controller
+      operationId: executeSearch-cart-get_1
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelEntityModelCart'
+        "404":
+          description: Not Found
+  /carts/{id}:
+    get:
+      tags:
+      - cart-entity-controller
+      description: get-cart
+      operationId: getItemResource-cart-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-entity-controller
+      description: update-cart
+      operationId: putItemResource-cart-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-entity-controller
+      description: delete-cart
+      operationId: deleteItemResource-cart-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-entity-controller
+      description: patch-cart
+      operationId: patchItemResource-cart-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelCart'
+        "204":
+          description: No Content
+  /carts/{id}/cartItems:
+    get:
+      tags:
+      - cart-property-reference-controller
+      description: get-cartitem-by-cart-Id
+      operationId: followPropertyReference-cart-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCartItem'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-property-reference-controller
+      description: update-cartitem-by-cart-Id
+      operationId: createPropertyReference-cart-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCartItem'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCartItem'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-property-reference-controller
+      description: delete-cartitem-by-cart-Id
+      operationId: deletePropertyReference-cart-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-property-reference-controller
+      description: patch-cartitem-by-cart-Id
+      operationId: createPropertyReference-cart-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCartItem'
+        "204":
+          description: No Content
+  /carts/{id}/cartItems/{propertyId}:
+    get:
+      tags:
+      - cart-property-reference-controller
+      description: get-cartitem-by-cart-Id
+      operationId: followPropertyReference-cart-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelCartItem'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - cart-property-reference-controller
+      description: delete-cartitem-by-cart-Id
+      operationId: deletePropertyReferenceId-cart-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /carts/{id}/customer:
+    get:
+      tags:
+      - cart-property-reference-controller
+      description: get-user-by-cart-Id
+      operationId: followPropertyReference-cart-get_2_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - cart-property-reference-controller
+      description: update-user-by-cart-Id
+      operationId: createPropertyReference-cart-put_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - cart-property-reference-controller
+      description: delete-user-by-cart-Id
+      operationId: deletePropertyReference-cart-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - cart-property-reference-controller
+      description: patch-user-by-cart-Id
+      operationId: createPropertyReference-cart-patch_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /carts/{id}/customer/{propertyId}:
+    get:
+      tags:
+      - cart-property-reference-controller
+      description: get-user-by-cart-Id
+      operationId: followPropertyReference-cart-get_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - cart-property-reference-controller
+      description: delete-user-by-cart-Id
+      operationId: deletePropertyReferenceId-cart-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /items:
+    get:
+      tags:
+      - item-entity-controller
+      description: get-item
+      operationId: getCollectionResource-item-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelItem'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelItem'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - item-entity-controller
+      description: create-item
+      operationId: postCollectionResource-item-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+  /items/{id}:
+    get:
+      tags:
+      - item-entity-controller
+      description: get-item
+      operationId: getItemResource-item-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - item-entity-controller
+      description: update-item
+      operationId: putItemResource-item-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - item-entity-controller
+      description: delete-item
+      operationId: deleteItemResource-item-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - item-entity-controller
+      description: patch-item
+      operationId: patchItemResource-item-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "204":
+          description: No Content
+  /orders:
+    get:
+      tags:
+      - order-entity-controller
+      description: get-order
+      operationId: getCollectionResource-order-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelOrder'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelOrder'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - order-entity-controller
+      description: create-order
+      operationId: postCollectionResource-order-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+  /orders/{id}:
+    get:
+      tags:
+      - order-entity-controller
+      description: get-order
+      operationId: getItemResource-order-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - order-entity-controller
+      description: update-order
+      operationId: putItemResource-order-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - order-entity-controller
+      description: delete-order
+      operationId: deleteItemResource-order-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - order-entity-controller
+      description: patch-order
+      operationId: patchItemResource-order-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "204":
+          description: No Content
+  /orders/{id}/customer:
+    get:
+      tags:
+      - order-property-reference-controller
+      description: get-user-by-order-Id
+      operationId: followPropertyReference-order-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - order-property-reference-controller
+      description: update-user-by-order-Id
+      operationId: createPropertyReference-order-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - order-property-reference-controller
+      description: delete-user-by-order-Id
+      operationId: deletePropertyReference-order-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - order-property-reference-controller
+      description: patch-user-by-order-Id
+      operationId: createPropertyReference-order-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /orders/{id}/customer/{propertyId}:
+    get:
+      tags:
+      - order-property-reference-controller
+      description: get-user-by-order-Id
+      operationId: followPropertyReference-order-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - order-property-reference-controller
+      description: delete-user-by-order-Id
+      operationId: deletePropertyReferenceId-order-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /orders/{id}/sales:
+    get:
+      tags:
+      - order-property-reference-controller
+      description: get-sale-by-order-Id
+      operationId: followPropertyReference-order-get_2_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelSale'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - order-property-reference-controller
+      description: update-sale-by-order-Id
+      operationId: createPropertyReference-order-put_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelSale'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelSale'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - order-property-reference-controller
+      description: delete-sale-by-order-Id
+      operationId: deletePropertyReference-order-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - order-property-reference-controller
+      description: patch-sale-by-order-Id
+      operationId: createPropertyReference-order-patch_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelSale'
+        "204":
+          description: No Content
+  /orders/{id}/sales/{propertyId}:
+    get:
+      tags:
+      - order-property-reference-controller
+      description: get-sale-by-order-Id
+      operationId: followPropertyReference-order-get_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelSale'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - order-property-reference-controller
+      description: delete-sale-by-order-Id
+      operationId: deletePropertyReferenceId-order-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /profile:
+    get:
+      tags:
+      - profile-controller
+      operationId: listAllFormsOfMetadata_1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RepresentationModelObject'
+  /profile/cartItems:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/carts:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_2
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/items:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_3
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/orders:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_4
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/sales:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_5
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/users:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_6
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /sales:
+    get:
+      tags:
+      - sale-entity-controller
+      description: get-sale
+      operationId: getCollectionResource-sale-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelSale'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelSale'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - sale-entity-controller
+      description: create-sale
+      operationId: postCollectionResource-sale-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelSale'
+  /sales/search/getTotalSaleAmountAfterDate:
+    get:
+      tags:
+      - sale-search-controller
+      operationId: executeSearch-sale-get
+      parameters:
+      - name: date
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                type: number
+                format: double
+        "404":
+          description: Not Found
+  /sales/{id}:
+    get:
+      tags:
+      - sale-entity-controller
+      description: get-sale
+      operationId: getItemResource-sale-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelSale'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - sale-entity-controller
+      description: update-sale
+      operationId: putItemResource-sale-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelSale'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelSale'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - sale-entity-controller
+      description: delete-sale
+      operationId: deleteItemResource-sale-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - sale-entity-controller
+      description: patch-sale
+      operationId: patchItemResource-sale-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelSale'
+        "204":
+          description: No Content
+  /sales/{id}/customer:
+    get:
+      tags:
+      - sale-property-reference-controller
+      description: get-user-by-sale-Id
+      operationId: followPropertyReference-sale-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - sale-property-reference-controller
+      description: update-user-by-sale-Id
+      operationId: createPropertyReference-sale-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - sale-property-reference-controller
+      description: delete-user-by-sale-Id
+      operationId: deletePropertyReference-sale-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - sale-property-reference-controller
+      description: patch-user-by-sale-Id
+      operationId: createPropertyReference-sale-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /sales/{id}/customer/{propertyId}:
+    get:
+      tags:
+      - sale-property-reference-controller
+      description: get-user-by-sale-Id
+      operationId: followPropertyReference-sale-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - sale-property-reference-controller
+      description: delete-user-by-sale-Id
+      operationId: deletePropertyReferenceId-sale-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /sales/{id}/item:
+    get:
+      tags:
+      - sale-property-reference-controller
+      description: get-item-by-sale-Id
+      operationId: followPropertyReference-sale-get_2_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - sale-property-reference-controller
+      description: update-item-by-sale-Id
+      operationId: createPropertyReference-sale-put_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - sale-property-reference-controller
+      description: delete-item-by-sale-Id
+      operationId: deletePropertyReference-sale-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - sale-property-reference-controller
+      description: patch-item-by-sale-Id
+      operationId: createPropertyReference-sale-patch_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "204":
+          description: No Content
+  /sales/{id}/item/{propertyId}:
+    get:
+      tags:
+      - sale-property-reference-controller
+      description: get-item-by-sale-Id
+      operationId: followPropertyReference-sale-get_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelItem'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - sale-property-reference-controller
+      description: delete-item-by-sale-Id
+      operationId: deletePropertyReferenceId-sale-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /sales/{id}/order:
+    get:
+      tags:
+      - sale-property-reference-controller
+      description: get-order-by-sale-Id
+      operationId: followPropertyReference-sale-get_3_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - sale-property-reference-controller
+      description: update-order-by-sale-Id
+      operationId: createPropertyReference-sale-put_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - sale-property-reference-controller
+      description: delete-order-by-sale-Id
+      operationId: deletePropertyReference-sale-delete_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - sale-property-reference-controller
+      description: patch-order-by-sale-Id
+      operationId: createPropertyReference-sale-patch_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "204":
+          description: No Content
+  /sales/{id}/order/{propertyId}:
+    get:
+      tags:
+      - sale-property-reference-controller
+      description: get-order-by-sale-Id
+      operationId: followPropertyReference-sale-get_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelOrder'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - sale-property-reference-controller
+      description: delete-order-by-sale-Id
+      operationId: deletePropertyReferenceId-sale-delete_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /users:
+    get:
+      tags:
+      - user-entity-controller
+      description: get-user
+      operationId: getCollectionResource-user-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelUser'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - user-entity-controller
+      description: create-user
+      operationId: postCollectionResource-user-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+  /users/{id}:
+    get:
+      tags:
+      - user-entity-controller
+      description: get-user
+      operationId: getItemResource-user-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - user-entity-controller
+      description: update-user
+      operationId: putItemResource-user-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - user-entity-controller
+      description: delete-user
+      operationId: deleteItemResource-user-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - user-entity-controller
+      description: patch-user
+      operationId: patchItemResource-user-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /api/v1/sales/max-sale-day:
+    post:
+      tags:
+      - sale-controller
+      operationId: getMaxSaleDay
+      parameters:
+      - name: input
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/GetMaxSaleDayInput'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMaxSaleDayOutput'
+  /api/v1/orders/place-order:
+    post:
+      tags:
+      - order-controller
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOutput'
+  /api/v1/carts/add-to-cart:
+    post:
+      tags:
+      - cart-controller
+      operationId: addToCart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToCartInput'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddToCartOutput'
+  /api/v1/sales/total/amount:
+    get:
+      tags:
+      - sale-controller
+      operationId: getTotalSaleAmountOfCurrentDate
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/TotalSaleOfCurrentDateOutput'
+  /api/v1/sales/top-five-selling-item-by-quantity:
+    get:
+      tags:
+      - sale-controller
+      operationId: getTop5SellingItemInLastMonthByQuantity
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/GetTopSellingItemByQuantityOutput'
+  /api/v1/sales/top-five-selling-item-by-amount:
+    get:
+      tags:
+      - sale-controller
+      operationId: getTop5SellingItemByAmount
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/GetTopSellingItemByPriceOutput'
+  /api/v1/carts/view-cart/{id}:
+    get:
+      tags:
+      - cart-controller
+      operationId: viewCart
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ViewCartOutput'
+components:
+  schemas:
+    AbstractJsonSchemaPropertyObject:
+      type: object
+      properties:
+        title:
+          type: string
+        readOnly:
+          type: boolean
+    Item:
+      type: object
+      properties:
+        type:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AbstractJsonSchemaPropertyObject'
+        requiredProperties:
+          type: array
+          items:
+            type: string
+    JsonSchema:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AbstractJsonSchemaPropertyObject'
+        requiredProperties:
+          type: array
+          items:
+            type: string
+        definitions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Item'
+        type:
+          type: string
+        $schema:
+          type: string
+    Links:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Link'
+    RepresentationModelObject:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelCart:
+      required:
+      - customer
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+    PagedModelEntityModelCart:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            carts:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelCart'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelCartItem:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            cartItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/CartItemResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    CollectionModelObject:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            objects:
+              type: array
+              items:
+                type: object
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelUser:
+      required:
+      - activated
+      - login
+      - password
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        login:
+          maxLength: 50
+          minLength: 4
+          pattern: "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
+          type: string
+        password:
+          maxLength: 60
+          minLength: 4
+          type: string
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        email:
+          maxLength: 100
+          minLength: 5
+          type: string
+        activated:
+          type: boolean
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    CollectionModelEntityModelCart:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            carts:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelCart'
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelUser:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelUser'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    EntityModelCartItem:
+      required:
+      - amount
+      - cart
+      - item
+      - quantity
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        quantity:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelCartItem:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            cartItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelCartItem'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    EntityModelItem:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        unit:
+          type: string
+        currency:
+          type: string
+        description:
+          type: string
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelItem:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelItem'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    EntityModelSale:
+      required:
+      - amount
+      - item
+      - order
+      - quantity
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        quantity:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelSale:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            sales:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelSale'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    EntityModelOrder:
+      required:
+      - customer
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        new:
+          type: boolean
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelOrder:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            orders:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelOrder'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelSale:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            sales:
+              type: array
+              items:
+                $ref: '#/components/schemas/SaleResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    CartRequestBody:
+      required:
+      - customer
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        customer:
+          type: string
+        new:
+          type: boolean
+    CartItemRequestBody:
+      required:
+      - amount
+      - cart
+      - item
+      - quantity
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        item:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        cart:
+          type: string
+        new:
+          type: boolean
+    ItemRequestBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        name:
+          maxLength: 50
+          minLength: 3
+          type: string
+        unitPrice:
+          type: number
+          format: double
+        unit:
+          type: string
+        currency:
+          type: string
+        description:
+          type: string
+        new:
+          type: boolean
+    UserRequestBody:
+      required:
+      - activated
+      - login
+      - password
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        login:
+          maxLength: 50
+          minLength: 4
+          pattern: "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
+          type: string
+        password:
+          maxLength: 60
+          minLength: 4
+          type: string
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        email:
+          maxLength: 100
+          minLength: 5
+          type: string
+        activated:
+          type: boolean
+        new:
+          type: boolean
+    CartItemResponse:
+      required:
+      - amount
+      - cart
+      - item
+      - quantity
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        quantity:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        new:
+          type: boolean
+    OrderRequestBody:
+      required:
+      - customer
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        customer:
+          type: string
+        new:
+          type: boolean
+    SaleResponse:
+      required:
+      - amount
+      - item
+      - order
+      - quantity
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        quantity:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        new:
+          type: boolean
+    SaleRequestBody:
+      required:
+      - amount
+      - item
+      - order
+      - quantity
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - V
+          - D
+          - P
+        syncVersion:
+          type: integer
+          format: int64
+        createdBy:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        lastModifiedDate:
+          type: string
+          format: date-time
+        item:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        order:
+          type: string
+        new:
+          type: boolean
+    GetMaxSaleDayInput:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    GetMaxSaleDayOutput:
+      type: object
+      properties:
+        result:
+          type: string
+        date:
+          type: string
+          format: date
+        amount:
+          type: number
+          format: double
+    PurchaseInput:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+    PurchaseOutput:
+      type: object
+      properties:
+        result:
+          type: string
+    AddToCartInput:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemInCart'
+    ItemInCart:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+    AddToCartOutput:
+      type: object
+      properties:
+        result:
+          type: string
+    TotalSaleOfCurrentDateOutput:
+      type: object
+      properties:
+        result:
+          type: string
+        amount:
+          type: number
+          format: double
+    GetTopSellingItemByQuantityOutput:
+      type: object
+      properties:
+        result:
+          type: string
+        topItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopItemByQuantity'
+    TopItemByQuantity:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        totalSales:
+          type: integer
+          format: int64
+    GetTopSellingItemByPriceOutput:
+      type: object
+      properties:
+        result:
+          type: string
+        topItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopItemByAmount'
+    TopItemByAmount:
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        totalSaleAmount:
+          type: number
+          format: double
+    ItemInViewCart:
+      type: object
+      properties:
+        name:
+          type: string
+        itemId:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int64
+        unitPrice:
+          type: number
+          format: double
+        amount:
+          type: number
+          format: double
+    ViewCartOutput:
+      type: object
+      properties:
+        result:
+          type: string
+        totalAmount:
+          type: number
+          format: double
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemInViewCart'
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        hreflang:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+        templated:
+          type: boolean

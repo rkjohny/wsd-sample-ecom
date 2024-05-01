@@ -55,7 +55,7 @@ dependencies {
 
 	//implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
 
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.3.0'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.5.0'
 
 	implementation group: 'com.github.loki4j', name: 'loki-logback-appender', version: '1.4.1'
 
