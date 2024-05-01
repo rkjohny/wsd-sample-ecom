@@ -95,7 +95,7 @@ public class AddToCartHelper extends AbstractHelper <AddToCartInput, AddToCartOu
                 cartService.save(cart);
             }
         } else {
-            //throw new ObjectNotFoundException(input.getUserId());
+            throw new ObjectNotFoundException(input.getUserId());
         }
         return output;
     }

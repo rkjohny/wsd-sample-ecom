@@ -59,8 +59,8 @@ public class PurchaseHelper extends AbstractHelper <PurchaseInput, PurchaseOutpu
                 }
                 cart.setStatus(Status.D);
                 cartRepository.saveAndFlush(cart);
-            } //else throw new ObjectNotFoundException(input.getUserId());
-        } //else throw new ObjectNotFoundException(input.getUserId());
+            } else throw new ObjectNotFoundException(input.getUserId());
+        } else throw new ObjectNotFoundException(input.getUserId());
         return output;
     }
 }
