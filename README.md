@@ -9,6 +9,8 @@
   </br>
   Docker 25.0.3
   </br>
+  IntelliJ IDE Community Edition
+  </br>
 </br>
 
 <b>Features:</b>
