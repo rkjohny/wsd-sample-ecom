@@ -22,9 +22,11 @@
   </br>
   API documentation
   </br>
-  Initialize with random data to test API
+  Initialized with random data to test API
   </br>
   Local log file
+  </br>
+  API Unit testing
   </br></br>
 
 <b>Run:</b>
