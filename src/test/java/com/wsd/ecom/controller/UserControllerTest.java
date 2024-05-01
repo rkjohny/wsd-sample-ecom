@@ -45,9 +45,9 @@ class UserControllerTest {
     }
 
     @Test
-    @Sql(statements = "INSERT INTO t_user (id, first_name, last_name, email, login, password_hash, created_date, last_modified_date, status, activated) VALUES (300,'test_user_first_name', 'test_user_last_name', 'david1234@test.com', 'david12345678', '1234567890', '2024-05-01 05:13:48.337998+06', '2024-05-01 05:13:48.337998+06', 'V', true)", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(statements = "INSERT INTO t_user (id, first_name, last_name, email, login, password_hash, created_date, last_modified_date, status, activated) VALUES (200,'test_user_first_name', 'test_user_last_name', 'david1234@test.com', 'david12345678', '1234567890', '2024-05-01 05:13:48.337998+06', '2024-05-01 05:13:48.337998+06', 'V', true)", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     public void getUser() {
-        User user = restTemplate.getForObject(endPoint + "/300", User.class);
+        User user = restTemplate.getForObject(endPoint + "/200", User.class);
         assertEquals("test_user_first_name", user.getFirstName());
         assertEquals("test_user_last_name", user.getLastName());
         assertEquals("david1234@test.com", user.getEmail());
