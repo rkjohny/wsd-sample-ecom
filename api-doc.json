@@ -1,0 +1,183 @@
+{
+  "/api/v1/sales/max-sale-day": {
+    "post": {
+      "tags": [
+        "sale-controller"
+      ],
+      "operationId": "getMaxSaleDay",
+      "parameters": [
+        {
+          "name": "input",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GetMaxSaleDayInput"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMaxSaleDayOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v1/orders/place-order": {
+    "post": {
+      "tags": [
+        "order-controller"
+      ],
+      "operationId": "placeOrder",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PurchaseInput"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PurchaseOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v1/carts/add-to-cart": {
+    "post": {
+      "tags": [
+        "cart-controller"
+      ],
+      "operationId": "addToCart",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddToCartInput"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddToCartOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v1/sales/total/amount": {
+    "get": {
+      "tags": [
+        "sale-controller"
+      ],
+      "operationId": "getTotalSaleAmountOfCurrentDate",
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/hal+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TotalSaleOfCurrentDateOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v1/sales/top-five-selling-item-by-quantity": {
+    "get": {
+      "tags": [
+        "sale-controller"
+      ],
+      "operationId": "getTop5SellingItemInLastMonthByQuantity",
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/hal+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTopSellingItemByQuantityOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v1/sales/top-five-selling-item-by-amount": {
+    "get": {
+      "tags": [
+        "sale-controller"
+      ],
+      "operationId": "getTop5SellingItemByAmount",
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/hal+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTopSellingItemByPriceOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/v1/carts/view-cart/{id}": {
+    "get": {
+      "tags": [
+        "cart-controller"
+      ],
+      "operationId": "viewCart",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/hal+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewCartOutput"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
