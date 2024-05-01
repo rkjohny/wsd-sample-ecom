@@ -1,9 +1,7 @@
 package com.wsd.ecom.controller;
 
 
-import com.wsd.ecom.dto.types.AddToCartInput;
-import com.wsd.ecom.dto.types.AddToCartOutput;
-import com.wsd.ecom.dto.types.ItemInCart;
+import com.wsd.ecom.dto.types.*;
 import com.wsd.ecom.entity.Item;
 import com.wsd.ecom.entity.User;
 import com.wsd.ecom.repository.ItemRepository;
@@ -114,8 +112,7 @@ class APIControllerTest {
         insertItems(10);
     }
 
-    @Test
-    void addToCart() {
+    AddToCartOutput addItemToCart() {
         User user = users.get(0);
         AddToCartInput input = new AddToCartInput();
 
@@ -134,6 +131,33 @@ class APIControllerTest {
         input.getItems().add(itemInCart2);
 
         AddToCartOutput output = restTemplate.postForObject(cartEndPoint + "/add-to-cart", input, AddToCartOutput.class);
+        return output;
+    }
+
+    @Test
+    void addToCart() {
+        AddToCartOutput output = addItemToCart();
         assertEquals("OK", output.getResult());
+    }
+
+    @Test
+    void viewCart() {
+        addItemToCart();
+        User user = users.get(0);
+        Item item1 = items.get(0);
+        Item item2 = items.get(1);
+        ViewCartOutput output = restTemplate.getForObject(cartEndPoint + "/view-cart/" + (user.getId() + 1), ViewCartOutput.class);
+        assertEquals(output.getResult(), "OK");
+//        assertEquals(output.getItems().size(), 2);
+//        assertEquals(output.getTotalAmount(), (item1.getUnitPrice()*2) + (item2.getUnitPrice() * 2));
+//
+//        ItemInViewCart viewCart1 = output.getItems().get(0);
+//        ItemInViewCart viewCart2 = output.getItems().get(1);
+//
+//        assertEquals(viewCart1.getItemId(), item1.getId());
+//        assertEquals(viewCart1.getName(), item1.getName());
+//
+//        assertEquals(viewCart2.getItemId(), item2.getId());
+//        assertEquals(viewCart2.getName(), item2.getName());
     }
 }
