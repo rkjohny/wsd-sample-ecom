@@ -2,7 +2,7 @@ package com.wsd.ecom.service;
 
 
 import com.wsd.ecom.repository.CartItemRepository;
-import com.wsd.ecom.mapper.CartItemMapper;
+import com.wsd.ecom.entity.mapper.CartItemMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

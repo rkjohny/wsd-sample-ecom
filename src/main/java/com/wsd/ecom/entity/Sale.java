@@ -22,7 +22,7 @@ public class Sale extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     protected Item item;
 
     @NotNull
@@ -34,7 +34,7 @@ public class Sale extends AbstractAuditingEntity implements Serializable {
     protected Double amount;
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     protected User customer;
 
     @NotNull

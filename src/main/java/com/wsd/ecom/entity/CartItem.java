@@ -24,7 +24,7 @@ public class CartItem extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Item item;
 
     @NotNull
@@ -36,7 +36,7 @@ public class CartItem extends AbstractAuditingEntity implements Serializable {
     private Double amount;
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private User customer;
 
     @NotNull

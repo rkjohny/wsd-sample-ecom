@@ -25,11 +25,7 @@ public class Order extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    @Column(name = "amount")
-    private Double amount;
-
-    @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private User customer;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
