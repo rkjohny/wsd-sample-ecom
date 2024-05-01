@@ -62,10 +62,9 @@ public class CartController {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the {@link ViewCartOutput} or with status {@code 404 (Not Found)}.
      */
     @Operation(summary = "Get the user's cart items")
-    @Parameter(description = "id of the user whose cart will be returned")
     @GetMapping("/view-cart/{id}")
     @ResponseBody
-    public ResponseEntity<ViewCartOutput> viewCart(@NotNull @PathVariable("id") Long id) {
+    public ResponseEntity<ViewCartOutput> viewCart(@Parameter(description = "id of the user whose cart will be returned") @NotNull @PathVariable("id") Long id) {
         ViewCartOutput output = cartApi.viewCart(id);
         return ResponseEntity.ok(output);
     }
