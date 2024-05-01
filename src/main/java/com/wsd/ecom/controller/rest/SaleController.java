@@ -3,6 +3,7 @@ package com.wsd.ecom.controller.rest;
 
 import com.wsd.ecom.core.SaleApi;
 import com.wsd.ecom.dto.types.*;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class SaleController {
      *
      * @return the {@link ResponseEntity} with total amount in {@link TotalSaleOfCurrentDateOutput} object
      */
+    @Operation(summary = "Get total sale amount of the current date")
     @GetMapping("/total/amount")
     @ResponseBody
     public ResponseEntity<TotalSaleOfCurrentDateOutput> getTotalSaleAmountOfCurrentDate() {
@@ -32,7 +34,7 @@ public class SaleController {
     /**
      * {@code POST  /api/v1/sales/max-sale-day} :
      *
-     * Returns the maximum sale date in a certain time period
+     * Returns the maximum sale date  of a certain time range
      *
      * @param input {
      *              startDate: start date of the time period in format yyyy-mm-dd
@@ -40,6 +42,7 @@ public class SaleController {
      * }
      * @return {@link GetMaxSaleDayOutput} on success
      */
+    @Operation(summary = "Returns the maximum sale date  of a certain time range")
     @PostMapping(value = "/max-sale-day", produces = MediaType.APPLICATION_JSON_VALUE )
     @ResponseBody
     public ResponseEntity<GetMaxSaleDayOutput> getMaxSaleDay(GetMaxSaleDayInput input) {
@@ -54,6 +57,7 @@ public class SaleController {
      *
      * @return {@link GetTopSellingItemByPriceOutput} on success
      */
+    @Operation(summary = "Returns the top 5 selling items of all time based on total sale amount")
     @GetMapping("/top-five-selling-item-by-amount")
     @ResponseBody
     public ResponseEntity<GetTopSellingItemByPriceOutput> getTop5SellingItemByAmount() {
@@ -68,6 +72,7 @@ public class SaleController {
      *
      * @return {@link GetTopSellingItemByQuantityOutput} on success
      */
+    @Operation(summary = "Returns the top 5 selling items of last month based on number of sales")
     @GetMapping("/top-five-selling-item-by-quantity")
     @ResponseBody
     public ResponseEntity<GetTopSellingItemByQuantityOutput> getTop5SellingItemInLastMonthByQuantity() {

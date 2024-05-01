@@ -4,6 +4,12 @@ import com.wsd.ecom.core.CartApi;
 import com.wsd.ecom.dto.types.AddToCartInput;
 import com.wsd.ecom.dto.types.AddToCartOutput;
 import com.wsd.ecom.dto.types.ViewCartOutput;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +39,15 @@ public class CartController {
      * }
      * @return {@link AddToCartOutput} object with status code 200 (OK) or 404 (NOT_FOUND) will be returned
      */
+    @Operation(summary = "Add items to a user's cart")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All items are added to the specified user's cart",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AddToCartOutput.class)) }),
+            @ApiResponse(responseCode = "404", description = "Invalid input supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content) })
     @PostMapping(value = "/add-to-cart", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<AddToCartOutput> addToCart(@Valid @RequestBody AddToCartInput input) {
@@ -46,6 +61,7 @@ public class CartController {
      * @param id the id of the user to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the {@link ViewCartOutput} or with status {@code 404 (Not Found)}.
      */
+    @Operation(summary = "Get the user's cart items")
     @GetMapping("/view-cart/{id}")
     @ResponseBody
     public ResponseEntity<ViewCartOutput> viewCart(@NotNull @PathVariable("id") Long id) {

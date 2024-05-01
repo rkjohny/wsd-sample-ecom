@@ -3,6 +3,7 @@ package com.wsd.ecom.controller.rest;
 import com.wsd.ecom.core.OrderApi;
 import com.wsd.ecom.dto.types.PurchaseInput;
 import com.wsd.ecom.dto.types.PurchaseOutput;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ public class OrderController {
      * }
      * @return {@link PurchaseOutput} with status code 200 OK
      */
+    @Operation(summary = "Place an order for a user. All items of the user's cart will be sold for the user")
     @PostMapping(value = "/place-order", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<PurchaseOutput> placeOrder(@Valid @RequestBody PurchaseInput input) {
