@@ -72,3 +72,9 @@ tasks.named('test') {
 	outputs.dir snippetsDir
 	useJUnitPlatform()
 }
+
+task dockerRun(type: Exec) {
+	workingDir project.rootDir
+
+	commandLine 'docker-compose', 'up', '--build', '-d'
+}
