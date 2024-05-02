@@ -35,12 +35,20 @@
 </br>
   gradle bootRun
   </br>
+</br>
 <b>Docker:</b>
 </br>
+  gradle build
   gradle dockerRun
 </br>
 </br>
 <b>Swagger Url:</b>
 </br>
   http://localhost:8080/swagger-ui/index.html
+
+</br>
+<b> Known issue: </b>
+  </br>
+  first <b>build</b> the project before running <b> docker-compose</b>
+
   
