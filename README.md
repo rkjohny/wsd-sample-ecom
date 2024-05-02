@@ -31,6 +31,11 @@
   API Unit testing
   </br></br>
 
+<b>Build:</b>
+  </br>
+    gralde build
+</br></br>
+
 <b>Run:</b>
 </br>
   gradle bootRun
@@ -41,7 +46,13 @@
   gradle build
   </br>
   gradle dockerRun
-</br>
+</br></br>
+or
+</br></br>
+  docker build .
+  </br>
+  docker-compose up
+</br></br>
 </br>
 <b>Swagger Url:</b>
 </br>
