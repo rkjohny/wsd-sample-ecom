@@ -39,6 +39,7 @@
 <b>Docker:</b>
 </br>
   gradle build
+  </br>
   gradle dockerRun
 </br>
 </br>
