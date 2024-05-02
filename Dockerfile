@@ -6,4 +6,4 @@ WORKDIR /app
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "rms.jar"]
+CMD ["java", "-jar", "ecom.jar"]
