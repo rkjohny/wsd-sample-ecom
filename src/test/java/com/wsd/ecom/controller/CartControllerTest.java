@@ -6,10 +6,6 @@ import com.wsd.ecom.entity.Item;
 import com.wsd.ecom.entity.User;
 import com.wsd.ecom.repository.ItemRepository;
 import com.wsd.ecom.repository.UserRepository;
-import com.wsd.ecom.service.ItemService;
-import com.wsd.ecom.service.OrderService;
-import com.wsd.ecom.service.SaleService;
-import com.wsd.ecom.service.UserService;
 import com.wsd.ecom.utils.RandomUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,7 +25,7 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class APIControllerTest {
+class CartControllerTest {
     private static RestTemplate restTemplate;
 
     private String BASE_URL = "http://localhost";
@@ -38,24 +33,12 @@ class APIControllerTest {
     @LocalServerPort
     private int PORT;
     private String cartEndPoint;
-    private String orderEndPoint;
-    private String saleEndPoint;
 
-
-    @InjectMocks
-    private UserService userService;
     @Mock
     private UserRepository userRepository;
-    @InjectMocks
-    private ItemService itemService;
+
     @Mock
     private ItemRepository itemRepository;
-
-//    @Autowired
-//    private OrderService orderService;
-//
-//    @Autowired
-//    private SaleService saleService;
 
 
     private List<User> users;
@@ -105,8 +88,6 @@ class APIControllerTest {
         MockitoAnnotations.openMocks(this);
 
         cartEndPoint = BASE_URL + ":" + PORT + apiVersion + "/carts";
-        orderEndPoint = BASE_URL + ":" + PORT + apiVersion + "/orders";
-        saleEndPoint = BASE_URL + ":" + PORT + apiVersion + "/sales";
 
         insertUser(10);
         insertItems(10);
@@ -146,18 +127,7 @@ class APIControllerTest {
         User user = users.get(0);
         Item item1 = items.get(0);
         Item item2 = items.get(1);
-        ViewCartOutput output = restTemplate.getForObject(cartEndPoint + "/view-cart/" + (user.getId() + 1), ViewCartOutput.class);
+        ViewCartOutput output = restTemplate.getForObject(cartEndPoint + "/view-cart/" + user.getId(), ViewCartOutput.class);
         assertEquals(output.getResult(), "OK");
-//        assertEquals(output.getItems().size(), 2);
-//        assertEquals(output.getTotalAmount(), (item1.getUnitPrice()*2) + (item2.getUnitPrice() * 2));
-//
-//        ItemInViewCart viewCart1 = output.getItems().get(0);
-//        ItemInViewCart viewCart2 = output.getItems().get(1);
-//
-//        assertEquals(viewCart1.getItemId(), item1.getId());
-//        assertEquals(viewCart1.getName(), item1.getName());
-//
-//        assertEquals(viewCart2.getItemId(), item2.getId());
-//        assertEquals(viewCart2.getName(), item2.getName());
     }
 }
