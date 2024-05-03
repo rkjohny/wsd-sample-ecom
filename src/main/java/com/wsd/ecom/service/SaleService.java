@@ -31,7 +31,9 @@ public class SaleService {
 
     public Double getTotalSaleAmountOfCurrentDate() {
         Instant date = Instant.now().truncatedTo(ChronoUnit.DAYS);
-        return repository.getTotalSaleAmountAfterDate(date);
+        Instant start = date;
+        Instant end = date.plus(1, ChronoUnit.DAYS);
+        return repository.getTotalSaleAmountAfterDate(start, end);
     }
 
     public GetMaxSaleDayOutput getMaxSaleDay(LocalDate start, LocalDate end) {

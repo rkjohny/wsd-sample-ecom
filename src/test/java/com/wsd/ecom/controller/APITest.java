@@ -8,6 +8,7 @@ import com.wsd.ecom.repository.ItemRepository;
 import com.wsd.ecom.repository.UserRepository;
 import com.wsd.ecom.service.CartService;
 import com.wsd.ecom.service.ItemService;
+import com.wsd.ecom.service.SaleService;
 import com.wsd.ecom.service.UserService;
 import com.wsd.ecom.utils.RandomUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -42,6 +43,9 @@ public class APITest {
     private ItemService itemService;
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private SaleService saleService;
 
 
     private String BASE_URL = "http://localhost";
@@ -83,7 +87,6 @@ public class APITest {
             user.setId(ID++);
             return user;
         }).collect(Collectors.toList());
-        //Mockito.when(userRepository.saveAllAndFlush(users)).thenReturn(users);
         users = userRepository.saveAllAndFlush(users);
     }
 
@@ -98,7 +101,6 @@ public class APITest {
             item.setId(ID++);
             return item;
         }).collect(Collectors.toList());
-        //Mockito.when(itemRepository.saveAllAndFlush(items)).thenReturn(items);
         items = itemRepository.saveAllAndFlush(items);
     }
 
@@ -124,17 +126,22 @@ public class APITest {
         return output;
     }
 
+    PurchaseOutput purchase() {
+        User user = users.get(0);
+        PurchaseInput input = new PurchaseInput();
+        input.setUserId(user.getId());
+        PurchaseOutput output = restTemplate.postForObject(orderEndPoint + "/place-order", input, PurchaseOutput.class);
+        return output;
+    }
+
     @Test
     void addToCart() {
-
         AddToCartOutput output = addItemToCart();
         assertEquals("OK", output.getResult());
     }
 
     @Test
     void viewCart() {
-        insertUser(10);
-        insertItems(10);
         addItemToCart();
         User user = users.get(0);
         Item item1 = items.get(0);
@@ -153,4 +160,24 @@ public class APITest {
         assertEquals(viewCart2.getItemId(), item2.getId());
         assertEquals(viewCart2.getName(), item2.getName());
     }
+
+    @Test
+    void placeOrder() {
+        addItemToCart();
+        PurchaseOutput output = purchase();
+        assertEquals("OK", output.getResult());
+    }
+
+    @Test
+    void totalAMount() {
+        addItemToCart();
+        purchase();
+        TotalSaleOfCurrentDateOutput output = restTemplate.getForObject(saleEndPoint + "/total/amount", TotalSaleOfCurrentDateOutput.class);
+        Item item1 = items.get(0);
+        Item item2 = items.get(1);
+        Double amount = saleService.getTotalSaleAmountOfCurrentDate();
+        assertEquals("OK", output.getResult());
+        assertEquals(amount, output.getAmount());
+    }
+
 }

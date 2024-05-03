@@ -12,6 +12,6 @@ import java.time.Instant;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long> {
 
-    @Query("SELECT sum(s.amount) FROM Sale s WHERE s.createdDate >=:date AND s.status='V'")
-    Double getTotalSaleAmountAfterDate(@Param("date") Instant date);
+    @Query("SELECT sum(s.amount) FROM Sale s WHERE s.createdDate BETWEEN :start AND :end AND s.status='V'")
+    Double getTotalSaleAmountAfterDate(@Param("start") Instant start, @Param("end") Instant end);
 }
